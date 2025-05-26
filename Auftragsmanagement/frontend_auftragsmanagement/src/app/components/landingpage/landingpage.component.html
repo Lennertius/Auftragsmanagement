@@ -1,0 +1,60 @@
+<div class="dashboard-wrapper">
+
+  
+  <div class="welcome-box">
+    <h2>Willkommen!</h2>
+    <p>Schön, dass du da bist.</p>
+  </div>
+
+
+  <div class="dashboard-content">
+
+    
+    <div class="big-box">
+      <h3>Letzte Aufträge</h3>
+      <hr class="box-divider" />
+
+      <p *ngIf="auftraege.length === 0">Keine Aufträge vorhanden</p>
+
+      <div *ngFor="let auftrag of auftraege">
+        <a [routerLink]="['/auftrag']">
+        <p><strong>{{ auftrag.name }}</strong></p>
+        </a>
+
+    
+        <hr class="box-divider" />
+      </div>
+    </div>
+
+    
+    <div class="big-box">
+      <h3>Neu!</h3>
+      <hr class="box-divider" />
+
+      <p *ngIf="artikel.length === 0">Keine Artikel vorhanden</p>
+
+      <div *ngFor="let item of artikel">
+          <a [routerLink]="['/artikel', item.artikelId]">
+        <p><strong>{{ item.name }}</strong> – {{ item.preis | currency:'EUR' }}</p>
+        </a>
+        <small>{{ item.beschreibung }}</small>
+        <hr class="box-divider" />
+      </div>
+    </div>
+
+    
+    <div class="big-box">
+      <h3>Aktuelle Rabatte</h3>
+      <hr class="box-divider" />
+      <div class="discount-badge">-5%</div>
+      <p>Ab 10 Artikeln!</p>
+      <hr class="box-divider" />
+      <div class="discount-badge">-10%</div>
+      <p>Ab 25 Artikeln!</p>
+      <hr class="box-divider" />
+       <div class="discount-badge">-15%</div>
+      <p>Ab 50 Artikeln!</p>
+    </div>
+
+  </div>
+</div>

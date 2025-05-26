@@ -1,0 +1,12 @@
+
+
+<app-navbar *ngIf="router.url !== '/loginpage'"></app-navbar>
+
+<div>
+    <router-outlet/>
+</div>
+
+<div class="login-info" *ngIf="username">
+  Eingeloggt als: <strong>{{ username }}</strong>
+</div>
+

@@ -1,0 +1,140 @@
+.auftrags_seite {
+  display: flex;
+  gap: 2rem;
+  padding-top: 0px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+}
+
+.formular_container {
+  flex: 1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.formular_container h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.formular_container label {
+  display: block;
+  font-weight: bold;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.formular_container input,
+.formular_container textarea {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  resize: none;
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 400px;
+}
+
+.formular_container button {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  border: none;
+  background-color: #1e90ff;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  width: 400px;
+}
+
+.formular_container button:hover {
+  background-color: #0074d9;
+}
+
+.select-dropdown {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 400px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+/* Einzelner Auftrag */
+.auftrag_container {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  min-height: 100px;
+  margin-bottom: 0.5rem;
+}
+
+.auftrag_container:first-child {
+  margin-top: 1rem;
+}
+
+.kunde_container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.trennlinie {
+  width: 2px;
+  background-color: #000;
+  margin: 0 1rem;
+}
+
+.artikel_container {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.artikel {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+}
+
+.artikel-liste {
+  height: 300px;
+  overflow-y: auto;
+  margin-top: 20px;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.artikel-intern {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.button-anzahl{
+  max-width: 30px;
+}

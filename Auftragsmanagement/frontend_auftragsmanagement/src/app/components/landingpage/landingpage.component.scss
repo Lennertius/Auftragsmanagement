@@ -1,0 +1,67 @@
+.dashboard-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+}
+
+.welcome-box {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 1150px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.dashboard-content {
+  display: flex;
+  gap: 2rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.big-box {
+  flex: 1;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 1.5rem;
+  min-height: 500px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.discount-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border:2px solid var(--divider-color);
+  border-radius: 8px;
+  font-weight: bold;
+  background-color: var(--bg-color);
+  color: red;
+  margin: 0.5rem 0;
+}
+
+.box-divider {
+  border: none;
+   border-bottom: 2px solid var(--divider-color);
+  margin: 0.5rem 0;
+}
+
+
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+}

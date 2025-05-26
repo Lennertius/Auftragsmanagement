@@ -1,0 +1,56 @@
+<div class="artikel_grid">
+   
+    <div class="artikel_formular" *ngIf="!isUser" >
+        <h2>Artikel erstellen</h2>
+        
+            <label>Name</label>
+            <input id="inp_artikel_name" name="inp_artikel_bezeichnung_name" type="text" [(ngModel)]="neuerArtikel.name" placeholder="Artikelname" maxlength="64" />
+            
+            <label>Beschreibung</label>
+            <textarea id="inp_artikel_beschreibung" name="inp_artikel_beschreibung_name" rows="5" [(ngModel)]="neuerArtikel.beschreibung" placeholder="Artikelbeschreibung" maxlength="255"></textarea>
+            
+            <label>Preis</label>
+            <input id="inp_artikel_preis" name="inp_artikel_preis_name" type="number" [(ngModel)]="neuerArtikel.preis" placeholder="Preis in €" />
+            
+            <button (click)="artikelErstellen()">Erstellen</button>
+        </div>
+    
+    
+    <div class="artikel_liste ">
+        <h2>Vorhandende Artikel</h2>
+    
+       <div class="filter-bereich">
+            <label for="suchbegriff">Suche nach Name:</label>
+            <input id="suchbegriff" type="text" [(ngModel)]="suchbegriff" (input)="anwendenFilter()" />
+
+            <label for="minPreis">Min Preis:</label>
+            <input id="minPreis" type="number" [(ngModel)]="minPreis" (input)="anwendenFilter()" />
+
+            <label for="maxPreis">Max Preis:</label>
+            <input id="maxPreis" type="number" [(ngModel)]="maxPreis" (input)="anwendenFilter()" />
+        </div>
+
+        <div class="sortier-bereich">
+            <label for="sortierung">Sortieren nach:</label>
+            <select id="sortierung" [(ngModel)]="sortierTyp" (change)="anwendenSortierung()">
+                <option value="nameAZ">Name A-Z</option>
+                <option value="nameZA">Name Z-A</option>
+                <option value="preisAsc">Preis ↑</option>
+                <option value="preisDesc">Preis ↓</option>
+                <option value="neueste">Neueste</option>
+                <option value="älteste">Älteste</option>
+            </select>
+        </div>
+
+
+    <div class="artikel_card" *ngFor="let artikel of artikelListe">
+        
+        <h3>{{artikel.name}}</h3>
+        <p>{{artikel.beschreibung}}</p>
+        <p><strong>{{artikel.preis}} €</strong></p>
+
+        <button [routerLink]="['/artikel', artikel.artikelId]">Details</button>
+        
+    </div> 
+</div>
+</div>

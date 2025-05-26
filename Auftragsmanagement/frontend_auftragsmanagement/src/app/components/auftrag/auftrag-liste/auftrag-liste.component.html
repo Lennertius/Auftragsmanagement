@@ -1,0 +1,44 @@
+
+
+<div class="menue-bar">
+    <div>
+        <label>Kunde filtern:</label> <!-- zwischen label und [Content] stand: for="kundenSelect"-->
+        <select [(ngModel)]="ausgewaehlterKundenId" (change)="filter()">
+            <option value=""></option>
+            <option *ngFor="let kunde of kundenliste" [value]="kunde.kundenId">
+                {{ kunde.vorname }} {{ kunde.nachname }}
+            </option>
+        </select>
+    </div>
+
+    <!--Der Status wird im Backend als -> neu | in_bearbeitung | abgeschlossen -->
+    <div>
+        <label>Status filtern:</label>
+        <select [(ngModel)]="ausgewaehlterStatus" (change)="filter()" >
+            <option value=""></option>
+            <option value="neu">Neu</option>
+            <option value="in_bearbeitung">In Bearbeitung</option>
+            <option value="abgeschlossen">Abgeschlossen</option>
+        </select>
+    </div>
+
+    <button (click)="btn_route_auftragformular()" [disabled]="isUser"  [class.invisible]="isUser">Neuer Auftrag</button>
+
+</div>
+
+<div class="auftrag_liste">
+
+    <div class="auftrag_card" *ngFor="let auftrag of gefilterteliste">
+
+        <p>{{ auftrag.kunde.vorname }} {{ auftrag.kunde.nachname }}</p>
+        <p>{{ auftrag.name }}</p>
+        <p>{{ auftrag.status }}</p>
+
+    <button (click)="btn_auftragdetail(auftrag)">Details</button>
+
+    </div>
+
+</div>
+
+
+

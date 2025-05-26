@@ -1,0 +1,47 @@
+
+
+<div class="auftrags_seite">
+  <div class="formular_container">
+    <h2>Auftrag erstellen</h2>
+    <form [formGroup]="auftragForm">
+      <label for="auftragName">Auftrag</label>
+      <input type="text" formControlName="auftragName">
+      <label for="kundeName">Kunde</label>
+        <select class="select-dropdown" formControlName="kundeId">
+          <option
+            *ngFor="let kunde of kunden" [value]="kunde.kundenId"
+          >
+            {{ kunde.vorname }} {{ kunde.nachname }}
+          </option>
+        </select>
+
+      <label for="bestellung">Beschreibung</label>
+      <textarea id="bestellung" rows="4" placeholder="Beschreibung" formControlName="beschreibung"></textarea>
+      <label for="date">Erstelldatum</label>
+      <input type="date" formControlName="erstelldatum">
+      <div class="artikel-liste">
+        <div class="artikel" *myFor="let art of aktuelleArtikel; let i = index">
+          <div class="artikel-intern">
+            <div>
+              {{ i + 1 }}. {{ art.name }}<br />
+              {{ art.beschreibung }}<br />
+              {{ art.preis }} €
+            </div>
+            <div>
+              <button class="button-anzahl" (click)="verringern(art)">-</button>
+              {{ getAnzahl(art) }}
+              <button
+                class="button-anzahl"
+                (click)="hinzufuegenOderErhoehen(art)"
+              >
+                +
+              </button>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </div>
+      <button (click)="erstellen()">Erstellen</button>
+    </form>
+  </div>
+</div>

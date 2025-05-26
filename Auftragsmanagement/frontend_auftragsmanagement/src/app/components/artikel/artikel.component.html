@@ -1,0 +1,21 @@
+<button class="btn_back" (click)="back()">Back</button>
+<div class="artikel-details" *ngIf="artikel">
+
+  <div class="btn_list" *ngIf="!isUser">
+    <button  *ngIf="isAdmin" class="btn_delete_kunde" (click)="deleteArtikel()">Löschen</button>
+    <!-- <button>Bearbeiten</button> -->
+  </div>
+
+  <h2>Artikel: {{ artikel.name }}</h2>
+
+  <div>
+    <strong>Beschreibung:</strong>
+    <p>{{ artikel.beschreibung }}</p>
+  </div>
+
+  <div>
+    <strong>Preis:</strong>
+    <p>{{ artikel.preis | currency:'EUR' }}</p>
+  </div>
+
+</div>

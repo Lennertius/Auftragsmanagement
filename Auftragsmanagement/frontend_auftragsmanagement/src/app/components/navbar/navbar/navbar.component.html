@@ -1,0 +1,17 @@
+<div class="navbar-breite-anpassung">
+<div class="navbar_container">
+
+    <div class="headline"><h1>Auftragsmanagement</h1> </div>
+    
+    <div class="btn_container" >
+     
+        <div class="btn_home" >     <button (click)="btn_Home_Route()">Home</button></div>
+        <div class="btn_kunde">     <button (click)="btn_Kunde_Route()" [disabled]="loginService.isUser()">Kunde</button></div>
+        <div class="btn_artikel">   <button (click)="btn_Artikel_Route()">Artikel</button></div>
+        <div class="btn_auftrag">   <button (click)="btn_Auftrag_Route()">Auftrag</button></div>
+         <div class="btn_login">     <button (click)="logout()">Logout</button> </div> 
+        <div class="toggle-theme">  <button (click)="toggleTheme()">🌓</button></div>
+
+    </div>
+</div>
+</div>

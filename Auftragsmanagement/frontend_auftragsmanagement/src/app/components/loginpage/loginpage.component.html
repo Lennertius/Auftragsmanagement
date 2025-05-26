@@ -1,0 +1,28 @@
+<div class="login-wrapper">
+  <h1>Auftragsmanagement</h1>
+  <button (click)="toggleTheme()" class="theme-toggle">🌓 </button>
+
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+
+
+    <input type="text" formControlName="username" placeholder="Benutzername" />
+
+
+    <div class="password-container">
+      <input [type]="showPassword ? 'text' : 'password'" formControlName="password" maxlength="30"
+        placeholder="Passwort" />
+
+      <button type="button" (click)="togglePasswordVisibility()" class="eye-button">
+        👁️
+      </button>
+    </div>
+
+    <button type="submit" class="login-button">Login</button>
+    <p *ngIf="loginFailed" class="error-msg">
+      Benutzername oder Passwort ist falsch.
+    </p>
+
+  </form>
+
+</div>

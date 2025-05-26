@@ -1,0 +1,67 @@
+<div class="flexbox">
+  <div class="flex-row">
+    <div class="flex-item">
+      <table>
+        <tr>
+          <td><label>Kunde:</label></td>
+          <td>
+            <select class="select-dropdown" [disabled]="isUser">
+              <option>
+                {{ auftrag?.kunde?.vorname }} {{ auftrag?.kunde?.nachname }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Beschreibung:</label></td>
+          <td>
+            <textarea [readonly]="isUser">{{ auftrag?.beschreibung }}</textarea>
+          </td>
+        </tr>
+        <tr>
+          <td><label>Status</label></td>
+          <td>
+            <select class="select-dropdown" [disabled]="isUser">
+              <option>Neu</option>
+              <option>In Bearbeitung</option>
+              <option>Abgeschlossen</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button
+              [disabled]="isUser"
+              [class.invisible]="isUser"
+              title="Keine Berechtigung als Benutzer"
+            >
+              Speichern
+            </button>
+          </td>
+          <td>
+            <button
+              [disabled]="isUser"
+              [class.invisible]="isUser"
+              title="Keine Berechtigung als Benutzer"
+              style="background-color: red"
+              (click)="delete_auftrag()"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="flex-item">
+      <div class="artikel-liste">
+        <div class="artikel" *ngFor="let artikel of artikel">
+          Name: {{ artikel.artikel.name }}<br />
+          Beschreibung: {{ artikel.artikel.beschreibung }}<br />
+          Preis: {{ artikel.artikel.preis }} <br />
+          Menge: {{ artikel.menge }}
+          <hr />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

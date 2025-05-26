@@ -1,0 +1,44 @@
+<button class="btn_back" (click)="back()">Back</button>
+
+<div class="kunde-details" *ngIf="kunde">
+
+  <div class="btn_list">
+    <button *ngIf="isAdmin" class="btn_delete_kunde" (click)="deleteKunde()">Löschen</button>
+    <!-- <button>Bearbeiten</button> -->
+  </div>
+
+  <div class="Details">
+    <h2>Kunde: {{ kunde.kundenId }}</h2>
+
+    <div>
+      <strong>Vorname:</strong>
+      <p>{{ kunde.vorname }}</p>
+    </div>
+
+    <div>
+      <strong>Nachname:</strong>
+      <p>{{ kunde.nachname }}</p>
+    </div>
+
+    <div>
+      <strong>Adresse:</strong>
+      <p>{{ kunde.adresse }}</p>
+    </div>
+
+    <div>
+      <strong>Email:</strong>
+      <p>{{ kunde.email }}</p>
+    </div>
+
+    <div>
+      <strong>Telefonnummer:</strong>
+      <p>{{ kunde.telefonnummer }}</p>
+    </div>
+
+     <div>
+      <strong>Status:</strong>
+      <p>{{ kunde.status }}</p>
+    </div>
+    
+  </div>
+</div>

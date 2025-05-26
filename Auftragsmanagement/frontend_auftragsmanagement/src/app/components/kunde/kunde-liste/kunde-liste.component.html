@@ -1,0 +1,42 @@
+
+<div class="kunde_grid">
+   
+    <div class="kunde_formular">
+        <h2>Kunde erstellen</h2>
+        
+            <label>Vorname</label>
+            <input id="inp_kunde_vorname" name="inp_kunde_vorname_name" type="text" [(ngModel)]="neuerKunde.vorname" placeholder="Vorname" maxlength="10" />
+            
+            <label>Nachname</label>
+            <input id="inp_kunde_nachname" name="inp_kunde_nachname_name" type="text" [(ngModel)]="neuerKunde.nachname" placeholder="Nachname" maxlength="15"/>
+            
+            <label>Email</label>
+            <input id="inp_kunde_email" name="inp_kunde_email_name" type="text" [(ngModel)]="neuerKunde.email" placeholder="Email" />
+
+            <label>Adresse</label>
+            <input id="inp_kunde_adresse" name="inp_kunde_adresse_name" type="text" [(ngModel)]="neuerKunde.adresse" placeholder="Adresse" maxlength="255"/>
+            
+            <label>Telefonnummer</label>
+            <input id="inp_kunde_telefonnummer" name="inp_kunde_telefonnummer_name" type="number" [(ngModel)]="neuerKunde.telefonnummer" placeholder="Telefonnummer" />
+            
+            <label>Status</label>
+            <input id="inp_kunde_status" name="inp_kunde_status_name" type="text" [(ngModel)]="neuerKunde.status" placeholder="Welcher Status hat die Person?" />
+            
+
+            <button (click)="kundeErstellen()">Erstellen</button>
+        </div>
+    
+    
+    <div class="kunde_liste">
+        <h2>Vorhandende Kunden</h2>
+
+    <div class="kunden_card" *ngFor="let kunde of kundenliste">
+        
+        <h3>{{kunde.kundenId}}</h3>
+        <p> {{kunde.vorname}} {{kunde.nachname}}</p>
+        
+        <button [routerLink]="['/kunde', kunde.kundenId]">Details</button>
+        
+    </div> 
+</div>
+</div>
