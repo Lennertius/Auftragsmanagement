@@ -28,3 +28,47 @@ Die AuftragPosition besteht auf folgenden Attributen: einer eindeutigen ID, eine
 Ein weiteres in unserem Projekt eingesetztes Entwurfsmuster ist die Strategy. Dieses Muster ermöglicht es, verschiedene Verhaltensweisen austauschbar zu definieren, ohne die Klasse zu verändern, die sie verwendet. In unserem Fall verwenden wir das Strategy Muster zur Umsetzung verschiedener Rabattlogiken. Die Klasse MengenRabatt ist eine konkrete Implementierung der RabattStrategy Schnittstelle. Diese Strategy berechnet Rabatte basierend auf der Anzahl der Artikel, die in einem Auftrag enthalten sind, also ein Mengenrabatt. Bei weniger als 10 Artikeln wird kein Rabatt gewährt. Bei 10 bis 24 Artikeln wird ein Rabatt von 5% auf den Gesamtpreis angewandt. Bei 25 Artikeln oder mehr gibt es einen 10% Rabatt auf den Gesamtpreis. Die Verwendung der Strategy uns Flexibilität, da wir einfach neue Rabattstrategien für z.B. Stammkunden ergänzen können. Außerdem trennen wir die Rabattberechnung von der Hauptberechnungslogik, sodass zuerst der Gesamtwert eines Auftrags berechnet wird, und erst im Anschluss der Rabatt. Dadurch wird der Rabatt nicht fehlerhaft auf einzelne Artikel berechnet sondern auf den Gesamtwert. 
 ### [Oliver] Testing
 Während der Entwicklung unserer Anwendung haben wir darauf geachtet, dass alle Funktionen korrekt arbeiten und ob die Schnittstellen erwartungsgemäß reagieren/antworten. Dafür haben wir kein automatisiertes Testing mit Unit- oder Intergrationstests verwendet, sondern haben die Anwendung manuell getestet. Im Backend haben wir dazu primär Insomnia verwendet, oder Extensions in der jeweiligen IDE. Mithilfe von Insomnia konnten wir HTTP-Anfragen gezielt an usnere REST Schnittstellen senden, um beispielsweise neue Artikel oder Aufträge zu erstellen, bestehende Einträge zu aktualisieren oder gezielt Fehler zu provozieren, um diese zu beheben. Dadurch konnten wir testen, wie das System auf fehlerhafte Eingaben reagiert. Auch komplexere Vorgänge wie die Berechnung von Rabatten oder das Setzen von Zuständen (z.B. „in Bearbeitung“, „abgeschlossen“) wurden so manuell überprüft. Dieses manuelle Testverfahren hat uns ermöglicht, Fehler frühzeitig zu erkennen und die Korrekte Funktionalität der wichtigsten Backend Features zu gewährleisten, auch ohne automatisierte Testumgebung.
+
+
+
+## [Jan] Frontend & Navigationsleiste
+Zu Beginn der Projektentwicklung wurde zunächst die Grundstruktur der Angular-Anwendung aufgebaut.
+Angular ist ein modernes Frontend-Framework, das mit TypeScript arbeitet und sich hervorragend für komponentenbasierte Webanwendungen eignet. 
+Es wurde gezielt Angular gewählt, da es eine stabile Struktur vorgibt und umfangreiche Werkzeuge für die Entwicklung größere Anwendungen mit mehreren Entwicklern bietet. 
+Besonders hilfreich war dabei die klare Trennung von Darstellung und Logik.
+Eine Angular-Anwendung besteht im Kern aus Modulen, Komponenten, Services und dem Routing-System.
+Angular ermöglicht die Entwicklung von Single-Page-Anwendungen (SPA).
+SPAs sind Webanwendungen, bei denen der gesamte Anwendungsbereich auf einer einzigen HTML-Seite geladen wird.
+Auch unsere Anwendung sollte sich wie eine SPA verhalten, das bedeutet, dass beim Navigieren keine vollständigen Seiten neu geladen werden, was eine flüssige Benutzererfahrung schafft. 
+Angular nutzt eine Komponentenbasierte Architektur. Das bedeutet, dass Webanwendungen in kleinere, wiederverwendbare Komponenten aufgeteilt werden, die jeweils eine bestimmte Funktion erfüllen.
+Angular Komponenten sind die grundlegenden Bausteine jeder Angular Anwendung. Sie definieren die Benutzeroberfläche und kapseln logische Teile der Anwendung.
+Sie bestehen aus einem TypeScript, HTML und CSS-Dokument.
+Diese Dateien sind logisch über den Komponenten-Dekorator miteinander verknüpft. 
+Angular sorgt dabei automatisch für die Verbindung zwischen Template und Logik über sogenanntes Data Binding.
+TypeScript steuert das Verhalten der Komponente. Sie enthält Methoden, die Interaktionen des Benutzers verarbeiten oder zum Beispiel Daten abrufen.
+Das HTML-Dokument definiert die Darstellung der Komponente. Hier werden HTML-Elemente und Angular-Templates verwendet, um die Benutzeroberfläche zu gestalten.
+Die CSS-Datei bestimmt das Aussehen der Komponente, einschließlich Farben, Schriftart und Layout.
+Die Navigationsleiste ist auch eine Komponente.
+Sie beinhaltet Links zu den Hauptbereichen der Anwendung wie Artikel, Kunde und Aufträge. Durch die Verwendung von „routerLink“ bleibt das Routing nahtlos und ohne das neu Laden einer Seite möglich.
+Das Routing in Angular ermöglicht die Navigation zwischen Komponenten 
+auf Basis von URLs.
+Damit wird ohne Seitenneuladen zwischen den Seiten gewechselt.
+Die Navigationsleiste ist zentral für die Benutzerführung in unserem Projekt Auftragsmanagement und dient in ihrer Funktion den Benutzer durch die Seiten der Webanwendung zu Navigieren und zu steuern, dabei wird sie zu jeder Zeit permanent angezeigt, somit ist sie unabhängig von der geladenen Seite, sofern man Authentifiziert ist.
+Die Navigationsleiste wurde als eigene Angular-Komponente aufgebaut.
+Sie besteht aus einem HTML-Template mit mehreren Buttons, die jeweils per „routerlink“ zu anderen Komponenten führen. Dabei wurde bewusst auf das Platzieren innerhalb des „<router-outlet>“ verzichtet.
+Warum nicht im „<router-outlet>“?
+Das <router-outlet>-Tag in Angular dient dem dynamischen Laden von Komponenten basierend auf der aktuellen Route. Wäre die Navigationsleiste dort eingebettet, würde sie bei jedem Seitenwechsel verschwinden und neu geladen werden. Das ist aus UX- und Perfomance-Gründen ungeeignet.
+Stattdessen wurde die Navigationsleiste außerhalb des <router-outlet> im HTML-Template platziert. So bleibt sie permanent sichtbar, unabhängig davon, welche Komponente im <router-outlet> angezeigt wird.
+So wird eine nutzerfreundliche Benutzeroberfläche zu jedem Zeitpunkt auf der Webanwendung gewährleistet.
+
+### [Jan] Das Command-Pattern für die Navigation
+Das Command Pattern ist ein Verhaltensmuster, das dazu dient, Befehle als eigenständige Objekte zu kapseln. Dadurch lassen sich Befehle flexibel verwalten, speichern oder rückgängig machen. In unserem Projekt kam es bei der Navigation zum Einsatz.
+Durch das einsetzen des Command-Entwurfsmusters für die Navigation werden die Links zentral für alle Komponenten greifbar.
+Statt direkt den Router in der Komponente aufzurufen, wurde eine separate Command-Klasse implementiert, die den Navigationsbefehl kapselt.
+In der klassischen Struktur eines Command-Patterns gibt es den Befehl, einen Empfänger, der die Aktion ausführt und optional einen Aufrufer, der die Ausführung steuert.
+Durch das abkapseln der Befehle kann jede Komponente zentral darauf zugreifen, weil eine Komponente nicht auf die Logik einer anderen zugreifen kann.
+Diese Trennung fördert die Wiederverwendbarkeit und ermöglicht es, dieselbe Navigationslogik in verschiedenen Komponenten zu verwenden, zum Beispiel auch in einem Dialog oder einer Toolbar. Um dadurch bessere Nachvollziehbarkeit für den Code zu gewährleisten. 
+Das Commands lassen sich leicht isoliert als direkte Methodenaufrufe innerhalb der Komponente testen.
+So wird beispielsweise beim Klick auf den Button „Artikel“
+nicht direkt der Router angesprochen, sondern es wird ein „ArtikelCommand“ erstellt, das intern weiß, zu welcher Route es gehört. In der Methode wird dem Befehl auf eine neue Seite zu wechseln in eine Variable geschrieben und mit einer Methode „execute()“ ausgeführt.
+
