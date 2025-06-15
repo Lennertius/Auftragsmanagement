@@ -76,15 +76,23 @@ Das HTML-Dokument definiert die Darstellung der Komponente. Hier werden HTML-Ele
 Die CSS-Datei bestimmt das Aussehen der Komponente, einschließlich Farben, Schriftart und Layout.
 Die Navigationsleiste ist auch eine Komponente.
 Sie beinhaltet Links zu den Hauptbereichen der Anwendung wie Artikel, Kunde und Aufträge. Durch die Verwendung von „routerLink“ bleibt das Routing nahtlos und ohne das neu Laden einer Seite möglich.
+
+
 Das Routing in Angular ermöglicht die Navigation zwischen Komponenten 
 auf Basis von URLs.
 Damit wird ohne Seitenneuladen zwischen den Seiten gewechselt.
+
+
 Die Navigationsleiste ist zentral für die Benutzerführung in unserem Projekt Auftragsmanagement und dient in ihrer Funktion den Benutzer durch die Seiten der Webanwendung zu Navigieren und zu steuern, dabei wird sie zu jeder Zeit permanent angezeigt, somit ist sie unabhängig von der geladenen Seite, sofern man Authentifiziert ist.
+
+
 Die Navigationsleiste wurde als eigene Angular-Komponente aufgebaut.
-Sie besteht aus einem HTML-Template mit mehreren Buttons, die jeweils per „routerlink“ zu anderen Komponenten führen. Dabei wurde bewusst auf das Platzieren innerhalb des „<router-outlet>“ verzichtet.
-Warum nicht im „<router-outlet>“?
+Sie besteht aus einem HTML-Template mit mehreren Buttons, die jeweils per „routerlink“ zu anderen Komponenten führen. Dabei wurde bewusst auf das Platzieren innerhalb des „router-outlet“ verzichtet.
+
+
+#### [Jan] Warum nicht im „router-outlet“?
 Das <router-outlet>-Tag in Angular dient dem dynamischen Laden von Komponenten basierend auf der aktuellen Route. Wäre die Navigationsleiste dort eingebettet, würde sie bei jedem Seitenwechsel verschwinden und neu geladen werden. Das ist aus UX- und Perfomance-Gründen ungeeignet.
-Stattdessen wurde die Navigationsleiste außerhalb des <router-outlet> im HTML-Template platziert. So bleibt sie permanent sichtbar, unabhängig davon, welche Komponente im <router-outlet> angezeigt wird.
+Stattdessen wurde die Navigationsleiste außerhalb des router-outlet im HTML-Template platziert. So bleibt sie permanent sichtbar, unabhängig davon, welche Komponente im router-outlet angezeigt wird.
 So wird eine nutzerfreundliche Benutzeroberfläche zu jedem Zeitpunkt auf der Webanwendung gewährleistet.
 
 ### [Jan] Das Command-Pattern für die Navigation
@@ -109,13 +117,19 @@ Um die Artikel vom Backend zu rufen und anzeigen zu können brauchen wir zwei Ko
 Eine Komponente für den Artikel selbst, er beschreibt wie ein Artikel aussieht und wird in der Artikelliste übernommen ohne ihn zu verändern: artikel.component.
 Eine weitere Komponente für die Liste und das Formular was wir sehen.
 In dieser Liste wird die Komponente „Artikel“ mehrfach angezeigt, nur mit anderen Werten, basierend auf der ID.
-Das Formular wird parallel angezeigt, allerdings benötigt der Nutzer Berechtigungen um das Formular sehen zu können. 
+Das Formular wird parallel angezeigt, allerdings benötigt der Nutzer Berechtigungen um das Formular sehen zu können.
+
+
 Die Komponente „Artikel“ besteht im HTML Bereich aus
 dem Namen oder die Bezeichnung des Artikels.
 Eine Beschreibung oder genauere Informationen über das Produkt.
 Und ein Preis der bestimmt mit welchem Wert dieser Artikel zum Verkauf steht.
+
+
 Die Komponente „Artikelliste“ besteht aus Formular und Liste.
 Das Formular, zum erstellen eines Artikel, besitzt drei Eingabefelder und einen Button mit entsprechendem Methoden Aufruf.
+
+
 Die Liste teilt sich in zwei Bereiche auf.
 Es gibt ein Filter & Sortierbereich eingebettet im Kopf der Liste. 
 Und die Liste selbst mit den verschiedenen Artikel aus dem Backend.
@@ -124,6 +138,8 @@ Und die Liste selbst mit den verschiedenen Artikel aus dem Backend.
 #### [Jan] Liste
 Die Sortierung erfolgt mithilfe des Strategy Patterns, einem klassischem Verhaltensmuster aus der Softwareentwicklung. 
 Es erlaubt, das Verhalten eines Objekts zur Laufzeit zu ändern, indem es verschiedene Algorithmen austauschbar kapselt.
+
+
 In unserer Anwendung haben wir folgende Sortierstrategien umgesetzt:
 *	Name A-Z
 *	Name Z-A
@@ -134,6 +150,8 @@ In unserer Anwendung haben wir folgende Sortierstrategien umgesetzt:
   
 Alle Strategien implementieren eine gemeinsame Schnittstelle „ArtikelSortierStrategie“, sodass sie über eine zentrale Methode „sortiere()“ verwendet werden können. 
 Ziel war es, die Erweiterbarkeit der Sortierlogik zu ermöglichen. Neue Sortierkriterien können einfach durch neue Klassen hinzugefügt werden, ohne bestehende Logik zu verändern.
+
+
 Das Filtern in Artikelliste wurde ebenfalls mit dem Strategy-Pattern gebaut.
 Hier ging es darum, gezielt nach bestimmten Eigenschaften zu filtern.
 In unserem Beispiel haben wir eine Suchleiste der automatisch nach mithilfe eines Observer automatisch die Liste nach dem Namen sucht.
@@ -142,6 +160,8 @@ So kann man wenn nötig alle Artikel mit einem Mindes oder Maximalem Preis herau
 Alle Filterstrategien implementieren das Interface „ArtikelFilterStrategy“, das eine „Filter()“-Methode bereitstellt.
 Mehrere Filter lassen sich problemlos kombinieren, indem sie nacheinander auf die Artikelliste angewendet werden.
 Die Filterung wird sofort ausgeführt, sobald der Nutzer einen Filterwert ändert. Dies sorgt für ein direktes Feedback und ein nutzerfreundliches Erlebnis.
+
+
 Der Observer ist ein Muster und wurde verwendet, um Änderungen an Datenquellen effizient und in Echtzeit an die Benutzeroberfläche weiterzugeben.
 Konkret wurde der Observer eingesetzt, um die Artikelliste nach dem Erstellen eines neuen Artikels, oder Filterwechsel automatisch zu aktualisieren, ohne dass der Benutzer manuell die Seite neu laden muss.
 Vorteile bei dieser Anwendung ist die Entkopplung zwischen Datenquelle und UI-Komponente, Automatisches Reagieren auf Änderung, Konsistenz der Daten im Frontend und eine saubere, wartbare Architektur
@@ -170,10 +190,14 @@ Allerdings wurde für die Liste keine Filter oder Sortierfunktion eingebunden.
 Standard wird abhängig der ID aufsteigend sortiert. 
 Die Komponente kann man zudem auch nur aufrufen sofern man administrative Rechte besitzt.
 Trotz struktureller Ähnlichkeiten zu den Artikeln gab es einige besondere Aspekte, die den Unterschied ausmachen.
+
+
 Das Formular zur Kundenerstellung verwendet wie beim Artikel das Factory Pattern, um neue Kundenobjekte zu erzeugen. Auch hier wird die UI-Komponente von der Objekterstellung getrennt. Der Unterschied liegt im Modell.
-Während der Artikel numerische Daten wie Preis verarbeitet, liegt der Fokus beim Kunden auf personenbezogenen Informationen, wie Name, Adresse, Telefonnummer und E-Mail. 
+Während der Artikel numerische Daten wie Preis verarbeitet, liegt der Fokus beim Kunden auf personenbezogenen Informationen, wie Name, Adresse, Telefonnummer und E-Mail.
 Die Kommunikation mit dem Backend sowie die Aktualisierung der Liste wurde auch hier mithilfe des Observer Patterns gelöst.
 Sobald ein Kunde erfolgreich erstellt wurde, wird ein Event via Subject im „KundenService“ ausgelöst, auf das die Komponente hört und entsprechend die Kundenliste aktualisiert.
+
+
 Im Gegensatz zur Artikelliste wurde beim Kundenbereich bewusst auf Sortierung und Filterung verzichtet.
 Der Grund war die Annahme, dass Kundendaten meist statisch oder gezielt über IDs abgefragt werden, während Artikellisten oft nach Kriterien wie Preis oder Name sortiert werden müssen. Eine einfache Darstellung und sofortiger Überblick standen hier im Fokus. Sollte der Kundenbereich in Zukunft erweitert werden,  könnten jedoch ähnliche Strategien mithilfe des Strategy Patterns nachgerüstet werden.
 
@@ -190,11 +214,13 @@ Zudem wird der Anwender, nach erfolgreicher Auftragserstellung, automatisch weit
 ### [Jan] Auftragsliste & Filterung 
 Die „AuftragslisteComponent“ stellte eine der Zentralen Anwendungen dar.
 Ziel war es, eine dynamische und benutzerfreundliche Auftragsübersicht zu entwickeln, die sowohl auf Nutzeraktionen reagiert als auch zentrale Entwurfsmuster sinnvoll integriert.
-Struktur
+
+#### [Jan] Struktur
 Die „AuftragslisteComponent“ wurde als eigenständige Komponente entwickelt und besteht rein aus der Listenansicht.
 Das zugehörige Formular zum Anlegen oder Bearbeiten eines Auftrags liegt auf separaten Routen und wurde in „Auftrag-Detail“ und „Auftrag-Formular“ bearbeitet.
 Die Auftragsliste ist somit allein für die visuelle Darstellung, Sortierung, Filterrung und Navigation zu den Detailansichten zuständig.
-Observer Pattern
+
+#### [Jan] Observer Pattern
 Ein wesentlicher Bestandteil dieser Komponente ist die Nutzung des Observer Patterns. Dabei wird der Auftragsservice als Subject verwendet. Die „AuftragslisteComponent“ hört auf das Subject und aktualisiert bei jeder Datenänderung automatisch die Liste.
 So wird sichergestellt, dass beispielsweise neu erstellte oder bearbeitete Aufträge sofort in der Übersicht reflektiert werden, ohne dass ein manuelles neu Laden nötig wäre. Diese reaktive Herangehensweise fördert eine flüssige Nutzererfahrung und reduziert unnötige Datenabfragen.
 
@@ -211,11 +237,11 @@ Diese beiden Aspekte wurden durch eigene Strategy-Klassen gekapselt und jewils �
 Der Mediator aktualisierte dann bei jeder Änderung automatisch die gefilterte und sortierte Datenliste, auf die die „AuftragslisteComponent“ abonniert war.
 Dadurch wurde eine klare Trennung der Verantwortlichkeit erreicht.
 
-### [Jan] Strategy Pattern
+#### [Jan] Strategy Pattern
 Zur Umsetzung der Filter- und Sortierlogik wurde das Strategy Pattern verwendet. Dieses erlaubt es, zur Laufzeit zwischen verschiedenen Algorithmen auszutauschen, ohne den Code von der Komponente oder dem Mediator anpassen zu müssen.
 Die Kombination dieser Muster ermöglicht eine skalierbare, flexible und wartbare Auftragsübersicht, die zukünftige Erweiterungen erleichert.
 
-## [Lennert] Auftrag-Detail
+### [Lennert] Auftrag-Detail
 Die Detail-Ansicht des Auftrags ist enorm wichtig, da so der Benutzer die genauen Details des Auftrags einsehen kann. Welche Artikel? Und wie viele von diesen? An welchen Kunden? Etc. Diese Komponente bietet dem Benutzer eine gut strukturierte Übersicht, in der sämtliche relevanten Informationen übersichtlich dargestellt und der Benutzer hat gleichzeitig die Möglichkeit den Auftrag zu bearbeiten. Vorausgesetzt, der Benutzer verfügt über die entsprechenden Berechtigungen.
 Die Ansicht ist in zwei wesentliche Bereiche unterteilt. Auf der linken Seite befindet sich ein Formular, das in Form einer Tabelle organisiert ist. Hier werden die wichtigen Attribute des Auftrags angezeigt. Beispielsweise wird hier der Kunde aufgezeigt. Dessen Vor- und Nachname wird in einem Dropdown-Menu angezeigt. Die Darstellung erfolgt für den normalen Nutzer ausschließlich zu Informationszwecken, da das Dropdown-Feld mittels einer Abhängigkeit vom Benutzerstatus entweder schreibgeschützt oder editierbar ist. Der Benutzer, der üblicherweise als "User" klassifiziert wird, hat eingeschränkten Zugriff, sodass wichtige Änderungen nur von Benutzern mit höheren Berechtigungen durchgeführt werden können. Wenn man nun eine erhöhte Berechtigung hat, kann man sehen, dass man das Dropdown-Menu auch öffnen kann, darin stehen dann sämtliche Kunden, die in der Datenbank der Kunden hinterlegt sind.
 Zusätzlich beinhaltet das Formular ein Textfeld, in dem die Beschreibung des Auftrags hinterlegt ist. Auch hier wird über die Nutzer-Rollen sichergestellt, dass unerlaubte Änderungen unterbunden werden. Ein weiteres Auswahlfeld zeigt den Status des Auftrags, der typischerweise zwischen "Neu", "In Bearbeitung" oder "Abgeschlossen" wechselt. Auch hier gilt: Wenn der Benutzer nicht über die nötigen Rechte verfügt, bleibt das Feld deaktiviert. Die Schaltflächen "Speichern" und "Delete" sind gleichermaßen an diesen Sicherheitsmechanismus gekoppelt und werden entweder nicht angezeigt oder sind inaktiv. Diese Maßnahmen sorgen zusammen für eine klare Trennung zwischen Ansichts- und Bearbeitungsmodus und tragen so zu einem verbesserten Sicherheitskonzept bei, da nur Benutzer mit benötigten Berechtigungen in der Lage sind den Auftrag zu bearbeiten.
